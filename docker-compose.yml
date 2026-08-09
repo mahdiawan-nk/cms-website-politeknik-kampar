@@ -1,0 +1,95 @@
+services:
+  app:
+    build: 
+      context: .
+      args:
+        APP_UID: ${APP_UID:-1000}
+        APP_GID: ${APP_GID:-1000}
+    container_name: kampus-cms-app
+    working_dir: /var/www/html
+    # Rekomendasi: Lepas baris user di compose jika di Dockerfile sudah didefinisikan "USER appuser" di akhir
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "29000:9000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - kampus-network
+
+  node:
+    image: node:22-alpine # Menggunakan alpine agar image lebih ringan
+    container_name: node_kampus
+    working_dir: /var/www/html
+    user: "${APP_UID:-1000}:${APP_GID:-1000}"
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "25173:5173" # Port Vite yang diexpose ke komputer host
+    environment:
+      - WATCHPACK_POLLING=true # Penting agar HMR mendeteksi perubahan file di host
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0" # Otomatis install & run server Vite
+    networks:
+      - kampus-network
+
+  webserver:
+    image: nginx:alpine
+    container_name: nginx_kampus
+    restart: unless-stopped
+    ports:
+      - "28000:80"
+    volumes:
+      - ./:/var/www/html
+      # Mengarah langsung ke file default.conf Anda
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
+    networks:
+      - kampus-network
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres_kampus
+    restart: unless-stopped
+    ports:
+      - "25432:5432"
+    environment:
+      POSTGRES_DB: cms_polkam
+      POSTGRES_USER: cms_polkam
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - kampus-network
+    healthcheck:
+      # SINKRONISASI: Menggunakan user & db cms_polkam sesuai environment atas
+      test: ["CMD-SHELL", "pg_isready -U cms_polkam -d cms_polkam"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_kampus
+    restart: unless-stopped
+    ports:
+      - "28080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@cms-polkam.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - kampus-network
+
+networks:
+  kampus-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  pgadmin_data:

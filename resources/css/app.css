@@ -1,0 +1,157 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+/* @theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+} */
+
+/* ==========================================================
+| POLKAM DESIGN SYSTEM
+========================================================== */
+
+@theme inline {
+
+    /* MIT Default */
+    --color-primary: var(--primary);
+    --color-primary-hover: var(--primary-hover);
+    --color-secondary: var(--secondary);
+
+    --color-accent: var(--accent);
+
+    --color-background: var(--background);
+    --color-surface: var(--surface);
+
+    --color-border: var(--border);
+
+    --color-text: var(--text);
+    --color-muted: var(--text-muted);
+}
+
+
+/* ==========================================================
+| DEFAULT THEME (MIT)
+========================================================== */
+
+:root{
+
+    --primary:#F97316;
+    --primary-hover:#EA580C;
+    --secondary:#1F2937;
+
+    --accent:#059669;
+
+    --background:#FFFFFF;
+    --surface:#F8FAFC;
+
+    --border:#E5E7EB;
+
+    --text:#0F172A;
+    --text-muted:#64748B;
+
+    --hero-gradient:
+        linear-gradient(
+            135deg,
+            #F97316,
+            #FB923C
+        );
+}
+
+
+/* ==========================================================
+| STANFORD
+========================================================== */
+
+html[data-theme="stanford"]{
+
+    --primary:#F97316;
+    --primary-hover:#EA580C;
+    --secondary:#1F2937;
+
+
+    --accent:#0F9D58;
+
+    --background:#FAF9F7;
+    --surface:#FFFFFF;
+
+    --border:#E7E5E4;
+
+    --text:#1C1917;
+    --text-muted:#57534E;
+
+    --hero-gradient:
+        linear-gradient(
+            135deg,
+            #8C1515,
+            #A12222
+        );
+
+}
+
+
+/* ==========================================================
+| BODY
+========================================================== */
+
+body{
+    background:var(--background);
+    color:var(--text);
+}
+
+
+/* ==========================================================
+| COMPONENT
+========================================================== */
+
+.hero-gradient{
+    background:var(--hero-gradient);
+}
+
+.card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+}
+
+.btn-primary{
+
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+
+    background:var(--primary);
+    color:white;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--primary-hover);
+
+}
+
+.btn-outline{
+
+    @apply px-6 py-3 rounded-lg border-2 font-semibold transition-all duration-300;
+
+    border-color:var(--primary);
+    color:var(--primary);
+
+}
+
+.btn-outline:hover{
+
+    background:var(--primary);
+    color:white;
+
+}
+
+/* Menyesuaikan elemen di dalam kelas .prose agar bergaya Stanford */
+.prose a {
+  color: #8C1515;
+}
+.prose a:hover {
+  color: #580000;
+}
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}

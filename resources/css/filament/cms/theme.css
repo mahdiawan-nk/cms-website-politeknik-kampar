@@ -1,0 +1,269 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+/* ==========================================================================
+   TEMA PREMIUM ECO-INDUSTRIAL POLITEKNIK KAMPAR
+   Palette:
+   - Deep Emerald : #047857 (Light Accent Primary) / #10B981 (Glow)
+   - Safety Orange: #FF8C00 (Secondary Accent / Indicator)
+   - Metallic Slate: #0F172A (Text/Headings), #64748B (Muted Text)
+   - Canvas Slate : #F8FAFC (Main Background)
+   ========================================================================== */
+
+/* --- 1. KANVAS / UTAMA --- */
+.fi-simple-main.fi-width-lg {
+    max-width: 100% !important;
+}
+
+.fi-simple-main {
+    margin-block: 0;
+    width: 100%;
+    padding-inline: 0;
+    padding-block: 0;
+
+}
+.fi-main, body {
+    background-color: #F8FAFC !important;
+    @apply text-slate-800;
+}
+
+/* --- 2. SIDEBAR PANEL (Clean Glass & Premium Contrast) --- */
+.fi-sidebar {
+    background-color: #FFFFFF !important;
+    @apply border-r border-slate-200/80 shadow-[2px_0_15px_rgba(15,23,42,0.02)] transition-all lg:z-20;
+    
+    .dark & {
+        background-color: #0F172A !important;
+        @apply border-slate-800 shadow-none;
+    }
+}
+
+/* Menghilangkan grid kasar, diganti dengan pendaran halus di sudut kiri atas */
+.fi-sidebar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(4, 120, 87, 0.05), transparent 50%);
+    pointer-events: none;
+    
+    .dark & {
+        background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.08), transparent 50%);
+    }
+}
+
+.fi-sidebar-item-btn {
+    @apply relative flex items-center gap-x-3 rounded-xl px-3.5 py-2.5 transition-all duration-200 text-slate-600 dark:text-slate-300;
+
+    & > .fi-icon {
+        @apply text-slate-400 dark:text-slate-500 transition-colors;
+    }
+
+    &:hover {
+        @apply bg-slate-100/80 dark:bg-slate-800/60 text-slate-900 dark:text-white;
+        
+        & > .fi-icon {
+            @apply text-[#047857] dark:text-[#10B981];
+        }
+    }
+}
+
+/* State Sidebar Aktif (Mewah & Jelas) */
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+    background: linear-gradient(90deg, rgba(4, 120, 87, 0.08) 0%, rgba(4, 120, 87, 0.02) 100%) !important;
+    border: 1px solid rgba(4, 120, 87, 0.18) !important;
+    @apply shadow-sm;
+    
+    .dark & {
+        background: rgba(16, 185, 129, 0.12) !important;
+        border: 1px solid rgba(16, 185, 129, 0.25) !important;
+    }
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon {
+    @apply text-[#047857] dark:text-[#10B981];
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-sidebar-item-label {
+    @apply text-[#047857] dark:text-white font-bold;
+}
+
+/* Garis Aksentuasi Safety Orange di Item Aktif */
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn::before {
+    content: "";
+    @apply absolute left-0 top-1/2 -translate-y-1/2 h-5 w-[3.5px] rounded-r-full;
+    background-color: #FF8C00;
+    box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
+}
+
+.fi-sidebar-item-label {
+    @apply flex-1 truncate text-xs font-semibold text-slate-600 dark:text-slate-300;
+}
+
+.fi-sidebar-group-label {
+    @apply text-[10px] font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500 px-3 mt-4 mb-1;
+}
+
+.fi-sidebar-nav {
+    @apply flex grow flex-col gap-y-1 overflow-y-auto px-3.5 py-5;
+}
+
+/* --- 3. TOPBAR PANEL --- */
+.fi-topbar-ctn {
+    @apply sticky top-0 z-30;
+}
+
+.fi-topbar {
+    background-color: #FFFFFF !important;
+    @apply flex min-h-16 items-center px-4 sm:px-6 border-b border-slate-200/80 text-slate-700 shadow-[0_4px_20px_rgba(0,0,0,0.015)] relative;
+
+    .dark & {
+        background-color: #1E293B !important;
+        @apply border-slate-800 text-slate-200 shadow-none;
+    }
+}
+
+/* Aksentuasi Garis Tipis Tri-Color Kampus di Topbar */
+.fi-topbar::before {
+    content: "";
+    @apply absolute top-0 left-0 right-0 h-[3px];
+    background: linear-gradient(to right, #047857 0%, #10B981 50%, #FF8C00 100%);
+}
+
+.fi-logo {
+    @apply text-slate-900 dark:text-white font-extrabold tracking-tight;
+}
+
+/* Input Pencarian di Topbar */
+.fi-topbar input {
+    @apply bg-slate-50 border border-slate-200/80 rounded-xl text-xs font-medium focus:border-[#047857] focus:ring-[#047857]/20;
+}
+
+/* --- 4. KARTU WIDGET & SECTION (Membuat Elemen "Floating Premium") --- */
+
+.fi-section, 
+.fi-ta-content{
+    background-color: #FFFFFF !important;
+    @apply rounded-2xl border border-slate-200/80 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.03)] transition-all duration-200;
+
+    .dark & {
+        background-color: #1E293B !important;
+        @apply border-slate-800 shadow-none;
+    }
+}
+
+.fi-wi-widget:hover {
+    @apply border-slate-300 shadow-[0_8px_30px_-5px_rgba(15,23,42,0.06)];
+}
+
+/* --- 5. DATA TABLE (Modul Tabel Informasi) --- */
+.fi-ta-table {
+    @apply w-full table-auto text-start border-separate border-spacing-0 overflow-hidden rounded-xl;
+}
+
+/* Header Tabel Eco Green Elegant */
+.fi-ta-table > thead > tr {
+    background: linear-gradient(135deg, #047857 0%, #064e3b 100%);
+    
+    .dark & {
+        background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
+    }
+}
+
+.fi-ta-header-cell {
+    @apply text-[11px] font-extrabold tracking-wider uppercase text-white px-4 py-3.5;
+}
+
+.fi-ta-table > tbody > tr {
+    @apply transition-colors duration-150;
+}
+
+.fi-ta-table > tbody > tr:nth-child(even) {
+    background-color: rgba(248, 250, 252, 0.7);
+    .dark & { background-color: rgba(15, 23, 42, 0.3); }
+}
+
+.fi-ta-table > tbody > tr:hover {
+    background-color: rgba(4, 120, 87, 0.04);
+    .dark & { background-color: rgba(16, 185, 129, 0.06); }
+}
+
+/* --- 6. BUTTONS & ACCENTS --- */
+.fi-btn-primary {
+    background-color: #047857 !important;
+    @apply shadow-sm hover:bg-[#064e3b] transition-all rounded-xl font-semibold;
+}
+
+/* ==========================================================================
+   PREMIUM FILAMENT HEADER STYLING
+   ========================================================================== */
+
+/* 1. Header Container & Layout */
+.fi-header {
+    @apply flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-5
+           border-b border-slate-200/80 dark:border-zinc-800/80
+           transition-all duration-300;
+}
+
+/* 2. Header Heading (Judul Halaman) */
+.fi-header-heading {
+    @apply text-2xl sm:text-3xl font-black tracking-tight 
+           text-slate-900 dark:text-slate-800
+           flex items-center gap-3 relative;
+}
+
+/* Akses Bawaan (Aksen Garis Neon/Emerald di Samping Judul) */
+.fi-header-heading::before {
+    content: '';
+    @apply inline-block w-1.5 h-7 rounded-full 
+           bg-gradient-to-b from-emerald-500 via-teal-500 to-emerald-600 
+           shadow-[0_0_10px_rgba(16,185,129,0.5)] shrink-0;
+}
+
+/* Subtitle / Description (jika ada di bawah judul) */
+.fi-header-subheading {
+    @apply text-xs sm:text-sm text-slate-500 dark:text-zinc-400 font-medium mt-1 pl-4.5;
+}
+
+/* 3. Actions Container (Pembungkus Tombol Aksi) */
+.fi-header-actions-ctn {
+    @apply flex items-center gap-3 shrink-0 mt-2 sm:mt-0;
+}
+
+.fi-ac {
+    @apply flex flex-wrap items-center gap-2.5;
+}
+
+/* 4. Action Buttons (Tombol "Buat Page" & Aksi Lainnya) */
+.fi-ac-btn-action,
+.fi-btn {
+    @apply relative inline-flex items-center justify-center gap-2 px-4 py-2.5 
+           rounded-xl font-bold text-xs uppercase tracking-wider
+           transition-all duration-300 shadow-md active:scale-95 overflow-hidden;
+}
+
+/* Tombol Primary (Gradasi Neon Emerald Modern) */
+.fi-ac-btn-action.fi-color-primary {
+    @apply bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 
+           dark:from-emerald-500 dark:via-teal-500 dark:to-emerald-600
+           text-white border-0
+           shadow-emerald-500/20 dark:shadow-emerald-950/50
+           hover:shadow-lg hover:shadow-emerald-500/35 hover:scale-[1.02]
+           active:scale-95;
+}
+
+/* Efek Shimmer Kilatan Cahaya saat Hover Tombol */
+.fi-ac-btn-action::after {
+    content: '';
+    @apply absolute inset-0 w-1/2 h-full bg-white/20 skew-x-12 
+           -translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none;
+}
+
+.fi-ac-btn-action:hover::after {
+    @apply translate-x-[300%];
+}
+
+.fi-wi-widget{
+    @apply bg-transparent border-0 shadow-none;
+}
