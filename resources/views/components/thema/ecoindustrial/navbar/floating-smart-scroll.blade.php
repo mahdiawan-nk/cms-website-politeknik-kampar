@@ -19,7 +19,7 @@
                     <div class="flex items-center gap-6">
                         <a href="tel:{{ $siteSetting->phone }}"
                             class="flex items-center gap-2 hover:text-[#FF8C00] transition-colors duration-200">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
                                 </path>
@@ -28,7 +28,7 @@
                         </a>
                         <a href="mailto:{{ $siteSetting->email }}"
                             class="flex items-center gap-2 hover:text-[#FF8C00] transition-colors duration-200">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                                 </path>
@@ -70,25 +70,27 @@
             </div>
         @endif
         <!-- Main Header -->
-        <header class="w-full xl:container mx-auto px-4 xl:px-8">
-            <div class="flex justify-between items-center transition-all duration-500 ease-in-out"
+        <header class="w-full xl:container mx-auto px-3 sm:px-4 xl:px-8">
+            <div class="flex justify-between items-center transition-all duration-500 ease-in-out gap-2 xl:gap-4"
                 :class="isScrolled ? 'h-16 sm:h-20' : 'h-20 sm:h-24'">
 
                 <!-- Logo & Title -->
-                <div class="flex items-center">
-                    <a href="/" class="flex items-center gap-3 sm:gap-4 group">
-                        <div class="transition-transform duration-300 w-12 h-12 sm:w-14 sm:h-14 group-hover:scale-105">
+                <div class="flex items-center shrink-0">
+                    <a href="/" class="flex items-center gap-2 sm:gap-3 xl:gap-4 group">
+                        <div
+                            class="transition-transform duration-300 w-10 h-10 sm:w-12 sm:h-12 xl:w-14 xl:h-14 group-hover:scale-105 shrink-0">
                             <img src="{{ asset('img/logo-plkm.png') }}" alt="Logo Polkam"
                                 class="object-contain drop-shadow-sm transition-all duration-500"
-                                :class="isScrolled ? 'w-10 h-10 sm:w-12 sm:h-12' : 'w-12 h-12 sm:w-14 sm:h-14'">
+                                :class="isScrolled ? 'w-9 h-9 sm:w-10 sm:h-10 xl:w-12 xl:h-12' :
+                                    'w-10 h-10 sm:w-12 sm:h-12 xl:w-14 xl:h-14'">
                         </div>
 
-                        <div class="flex flex-col border-l-2 border-[#10B981] pl-3 sm:pl-4 transition-all duration-500">
+                        <div
+                            class="flex flex-col border-l-2 border-[#10B981] pl-2 sm:pl-3 xl:pl-4 transition-all duration-500 whitespace-nowrap">
                             @php
                                 $siteName = trim($siteSetting->site_name ?? 'POLITEKNIK KAMPAR');
                                 $hasSpace = str_contains($siteName, ' ');
 
-                                // Memisahkan kata utama dan kata terakhir
                                 $firstPart = $hasSpace
                                     ? \Illuminate\Support\Str::beforeLast($siteName, ' ')
                                     : $siteName;
@@ -96,7 +98,8 @@
                             @endphp
                             <span
                                 class="font-sans font-bold tracking-tight text-[#111827] leading-none transition-all duration-500"
-                                :class="isScrolled ? 'text-[16px] sm:text-[20px]' : 'text-[18px] sm:text-[22px]'">
+                                :class="isScrolled ? 'text-[15px] sm:text-[18px] xl:text-[20px]' :
+                                    'text-[16px] sm:text-[20px] xl:text-[22px]'">
                                 {{ $firstPart }}
                                 @if ($highlightPart)
                                     <span class="text-[#FF8C00]">{{ $highlightPart }}</span>
@@ -104,8 +107,9 @@
                             </span>
 
                             <span
-                                class="font-sans font-bold tracking-[0.2em] text-[#047857] uppercase mt-1 transition-all duration-500"
-                                :class="isScrolled ? 'text-[7px] sm:text-[9px]' : 'text-[8px] sm:text-[10px]'">
+                                class="font-sans font-bold tracking-[0.15em] xl:tracking-[0.2em] text-[#047857] uppercase mt-1 transition-all duration-500"
+                                :class="isScrolled ? 'text-[7px] sm:text-[8px] xl:text-[9px]' :
+                                    'text-[8px] sm:text-[9px] xl:text-[10px]'">
                                 {{ $siteSetting->site_tagline }}
                             </span>
                         </div>
@@ -113,26 +117,26 @@
                 </div>
 
                 <!-- RIGHT SECTION: Nav + Lang Switcher + Mobile Toggle -->
-                <div class="flex items-center gap-2 sm:gap-5">
+                <div class="flex items-center gap-1.5 xl:gap-4 min-w-0">
 
-                    <!-- Desktop Navigation -->
-                    <nav class="hidden lg:flex items-center space-x-1">
+                    <!-- Desktop Navigation (Gunakan xl:flex dan penyesuaian padding responsif) -->
+                    <nav class="hidden xl:flex items-center space-x-0.5 2xl:space-x-1">
                         @foreach ($menus as $index => $menu)
                             @if (empty($menu['children']))
                                 <a href="{{ $menu['url'] }}" target="{{ $menu['newtab'] ? '_blank' : '' }}"
                                     wire:navigate
-                                    class="px-4 py-2 text-[14px] font-semibold rounded-lg transition-all duration-200 text-[#111827] hover:bg-gray-100 hover:text-[#047857]">
+                                    class="whitespace-nowrap px-2.5 2xl:px-4 py-2 text-[13px] 2xl:text-[14px] font-semibold rounded-lg transition-all duration-200 text-[#111827] hover:bg-gray-100 hover:text-[#047857]">
                                     {{ $menu['label'] }}
                                 </a>
                             @else
                                 <div class="relative" @mouseenter="activeDropdown = {{ $index }}"
                                     @mouseleave="activeDropdown = null">
                                     <button
-                                        class="flex items-center gap-1.5 px-4 py-2 text-[14px] font-semibold rounded-lg transition-all duration-200"
+                                        class="whitespace-nowrap flex items-center gap-1 px-2.5 2xl:px-4 py-2 text-[13px] 2xl:text-[14px] font-semibold rounded-lg transition-all duration-200"
                                         :class="activeDropdown === {{ $index }} ? 'bg-gray-100 text-[#047857]' :
                                             'text-[#111827] hover:bg-gray-100 hover:text-[#047857]'">
                                         <span>{{ $menu['label'] }}</span>
-                                        <svg class="w-3.5 h-3.5 transition-transform duration-200"
+                                        <svg class="w-3.5 h-3.5 shrink-0 transition-transform duration-200"
                                             :class="activeDropdown === {{ $index }} ? 'rotate-180 text-[#047857]' :
                                                 'text-gray-400'"
                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -142,16 +146,17 @@
                                     </button>
 
                                     <!-- Dropdown Sub-menu -->
-                                    <div x-show="activeDropdown === {{ $index }}" x-cloak
+                                    <div x-show="activeDropdown === {{ $index }}"
                                         x-transition:enter="transition ease-out duration-200"
-                                        x-transition:enter-start="opacity-0 scale-95 -translate-y-2 -translate-x-1/2"
-                                        x-transition:enter-end="opacity-100 scale-100 translate-y-0 -translate-x-1/2"
+                                        x-transition:enter-start="opacity-0 scale-95 transform -translate-y-2"
+                                        x-transition:enter-end="opacity-100 scale-100 transform translate-y-0"
                                         x-transition:leave="transition ease-in duration-150"
-                                        x-transition:leave-start="opacity-100 scale-100 translate-y-0 -translate-x-1/2"
-                                        x-transition:leave-end="opacity-0 scale-95 -translate-y-2 -translate-x-1/2"
-                                        class="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-auto bg-white/95 backdrop-blur-md border border-gray-100 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] rounded-[2rem] z-50">
+                                        x-transition:leave-start="opacity-100 scale-100 transform translate-y-0"
+                                        x-transition:leave-end="opacity-0 scale-95 transform -translate-y-2"
+                                        class="absolute left-0 top-full mt-2 w-auto bg-white/95 backdrop-blur-md border border-[#F8FAFC] shadow-xl rounded-xl z-50 p-2"
+                                        style="display: none;">
 
-                                        <x-thema.ecoindustrial.navbar.mega-menu :items="$menu['children']" />
+                                        <x-thema.ecoindustrial.navbar.menu-tree :items="$menu['children']" />
                                     </div>
                                 </div>
                             @endif
@@ -160,15 +165,15 @@
 
                     <!-- Pendaftaran / CTA Button -->
                     <a href="https://pmb.poltek-kampar.ac.id" target="_blank"
-                        class="hidden lg:flex items-center justify-center px-5 py-2.5 bg-[#FF8C00] text-white text-[14px] font-bold rounded-lg hover:bg-[#F97316] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+                        class="hidden xl:flex items-center justify-center whitespace-nowrap px-3.5 2xl:px-5 py-2 2xl:py-2.5 bg-[#FF8C00] text-white text-[13px] 2xl:text-[14px] font-bold rounded-lg hover:bg-[#F97316] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 shrink-0">
                         Daftar Sekarang
                     </a>
 
                     <!-- Language Switcher -->
-                    <div x-data="{ langOpen: false }" class="relative" @click.away="langOpen = false">
+                    <div x-data="{ langOpen: false }" class="relative shrink-0" @click.away="langOpen = false">
                         <button @click="langOpen = !langOpen"
-                            class="flex items-center gap-1.5 px-3 py-2 text-[13px] transition-all duration-200 border border-gray-200 rounded-lg text-[#111827] font-semibold hover:border-[#10B981] hover:text-[#047857] hover:bg-gray-50">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            class="flex items-center gap-1.5 px-2.5 2xl:px-3 py-2 text-[12px] 2xl:text-[13px] transition-all duration-200 border border-gray-200 rounded-lg text-[#111827] font-semibold hover:border-[#10B981] hover:text-[#047857] hover:bg-gray-50">
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
                                 </path>
@@ -190,8 +195,8 @@
                         </div>
                     </div>
 
-                    <!-- Mobile Hamburger -->
-                    <div class="flex items-center lg:hidden">
+                    <!-- Mobile Hamburger Toggle (Buka menu mobile pada xl:hidden) -->
+                    <div class="flex items-center xl:hidden shrink-0">
                         <button @click="mobileOpen = !mobileOpen"
                             class="text-[#111827] focus:outline-none p-2 rounded-lg hover:bg-gray-100 transition-colors">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -211,7 +216,7 @@
             x-transition:enter-start="opacity-0 max-h-0" x-transition:enter-end="opacity-100 max-h-[70vh]"
             x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 max-h-[70vh]"
             x-transition:leave-end="opacity-0 max-h-0"
-            class="lg:hidden border-t border-gray-100 bg-white/95 overflow-y-auto" x-cloak>
+            class="xl:hidden border-t border-gray-100 bg-white/95 overflow-y-auto" x-cloak>
             <div class="px-4 pt-3 pb-6 space-y-1">
                 @foreach ($menus as $menu)
                     @if (empty($menu['children']))

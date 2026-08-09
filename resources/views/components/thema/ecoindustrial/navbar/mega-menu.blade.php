@@ -8,7 +8,7 @@
     <div class="h-1 w-full bg-gradient-to-r from-[#10B981] via-emerald-400 to-[#FF8C00]"></div>
 
     {{-- Grid Kolom dengan Divider Halus --}}
-    <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-100/80">
+    <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100/80">
         @foreach ($items as $item)
             @php
                 $hasChildren = !empty($item['children']);
@@ -101,5 +101,16 @@
             </div>
         @endforeach
     </div>
+    <!-- Dropdown Sub-menu -->
+    {{-- <div x-show="activeDropdown === {{ $index }}" x-cloak
+                                        x-transition:enter="transition ease-out duration-200"
+                                        x-transition:enter-start="opacity-0 scale-95 -translate-y-2 -translate-x-1/2"
+                                        x-transition:enter-end="opacity-100 scale-100 translate-y-0 -translate-x-1/2"
+                                        x-transition:leave="transition ease-in duration-150"
+                                        x-transition:leave-start="opacity-100 scale-100 translate-y-0 -translate-x-1/2"
+                                        x-transition:leave-end="opacity-0 scale-95 -translate-y-2 -translate-x-1/2"
+                                        class="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-auto bg-white/95 backdrop-blur-md border border-gray-100 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] rounded-[2rem] z-50">
 
+                                        <x-thema.ecoindustrial.navbar.mega-menu :items="$menu['children']" level="1"/>
+                                    </div> --}}
 </div>
